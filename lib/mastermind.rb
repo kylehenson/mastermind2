@@ -1,3 +1,4 @@
+require_relative 'messages'
 require_relative 'response'
 require 'pry'
 
@@ -8,19 +9,20 @@ class Mastermind
     @number_of_guesses = 1
   end
 
-  def instructions
-    Response.new(:message => "I will generate a random sequence of (r)ed, (b)lue, (g)reen, and (y)ellow in any order. Guess the correct colors in the correct order in as few attempts possible:", :status => :continue)
-  end
+  # def instructions
+  #   Response.new(:message => messages.instructions, :status => :continue)
+  # end
 
   def execute(input)
+    messages = Messages.new
     secret = "BBGB"
     if input == "i" || input == "instructions"
-      instructions
+      Response.new(:message => messages.instructions, :status => :continue)
     elsif input == "p" || input == "play"
-      Response.new(:message => "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. What's your guess?", :status => :continue)
+      Response.new(:message => messages.play, :status => :continue)
       # play
     elsif input == "q" || input == "quit"
-      Response.new(:message => "Thanks for playing!", :status => :stop)
+      Response.new(:message => messages.quit, :status => :stop)
     elsif input == "c" || input == "cheat"
       Response.new(:message => "The secret sequence is: #{secret}", :status => :continue)
     elsif input.length < 4

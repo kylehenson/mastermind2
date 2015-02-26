@@ -1,9 +1,10 @@
 require './lib/mastermind'
+require './lib/messages'
 
 class Runner
   def run
-    puts "Welcome to Mastermind"
-    puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit"
+    messages = Messages.new
+    messages.welcome
 
     mastermind = Mastermind.new
     response = nil
@@ -14,6 +15,6 @@ class Runner
       response = mastermind.execute(input)
       puts response.message
     end
-    puts "Goodbye!"
+    messages.goodbye
   end
 end
