@@ -5,4 +5,8 @@ class Response
     @message = inputs[:message]
     @status  = inputs[:status]
   end
+
+  def quit
+
+  end
 end
